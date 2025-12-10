@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Balança Baleiro — Banda de Bailão</title>
+  <meta name="description" content="Balança Baleiro — banda de bailão. Contrate para seu evento!" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">BB</div>
+      <div>
+        <div class="brand-title">Balança Baleiro</div>
+        <div class="brand-sub">Banda de Bailão • Bailão Raiz</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#agenda">Agenda</a>
+      <a href="#videos">Vídeos</a>
+      <a href="#contato">Contato</a>
+      <a class="cta" href="#contratar">Contratar</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <video class="bg-video" id="bg-video" autoplay loop playsinline>
+        <source src="../assets/videos/videoplayback.mp4"  type="video/mp4" />
+    </video>      
+
+    <div class="content container">
+      <div class="left">
+        <h1>Balança Baleiro — Energia e tradição no seu evento</h1>
+        <p>Repertório para bailões, casamentos, festas municipais e eventos corporativos.</p>
+
+        <div class="buttons">
+            <button class="btn play" id="btn-audio">▶ Ativar áudio</button>
+            <button class="btn vol" id="volDown">–</button>
+            <button class="btn vol" id="volUp">+</button>
+            <a href="#contratar" class="btn book">Quero contratar</a>
+        </div>
+          
+      </div>
+
+      <div class="right next-show">
+        <strong>Próximo show</strong>
+        <div>São Roque • 18/12 • 22h</div>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <main>
+    <section class="container card" id="agenda">
+      <h2>Agenda</h2>
+      <div class="agenda-grid">
+        <div class="agenda-item"><strong>12/12 — Festa do CTG</strong><div>Centro Cultural • R$25</div></div>
+        <div class="agenda-item"><strong>18/12 — São Roque</strong><div>Praça Central • Entrada franca</div></div>
+        <div class="agenda-item"><strong>24/12 — Festa de Natal</strong><div>Salão Paroquial • Reservas</div></div>
+      </div>
+    </section>
+
+    <section class="container card" id="videos">
+      <h2>Vídeos e melhores momentos</h2>
+      <div class="video-grid">
+        <div class="thumb">Thumbnail 1</div>
+        <div class="thumb">Thumbnail 2</div>
+        <div class="thumb">Thumbnail 3</div>
+      </div>
+    </section>
+
+    <section class="container card" id="galeria">
+      <h2>Galeria</h2>
+      <div class="gallery">
+        <img src="photo1.jpg" />
+        <img src="photo2.jpg" />
+        <img src="photo3.jpg" />
+        <img src="photo4.jpg" />
+      </div>
+    </section>
+
+    <section class="container card" id="sobre">
+      <h2>Sobre a banda</h2>
+      <p>Balança Baleiro é uma banda de bailão com raízes gauchescas.</p>
+      <div class="integrantes">
+        <div><strong>Integrante 1</strong><div>Acordeon e voz</div></div>
+        <div><strong>Integrante 2</strong><div>Violão e harmonia</div></div>
+      </div>
+    </section>
+
+    <section class="container card" id="contato">
+      <h2 id="contratar">Contrate a banda</h2>
+      <p>Preencha ou clique no WhatsApp para orçamento.</p>
+
+      <div class="contato-grid">
+        <form>
+          <input name="nome" placeholder="Seu nome" required />
+          <input name="email" placeholder="Email" type="email" required />
+          <input name="data" placeholder="Data do evento" />
+          <textarea name="detalhes" placeholder="Detalhes" rows="4"></textarea>
+          <button type="submit">Enviar orçamento</button>
+        </form>
+
+        <div class="side-contact">
+          <a href="#" class="zap">WhatsApp</a>
+          <div class="card mini">
+            <strong>Mídia kit</strong>
+            <p>Fotos, vídeo promo e setlist.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © Balança Baleiro — Desenvolvido por Romeu
+  </footer>
+
+  <script>
+    const video = document.getElementById('bg-video');
+    const btnAudio = document.getElementById('btn-audio');
+    const volUp = document.getElementById('volUp');
+    const volDown = document.getElementById('volDown');
+  
+    // Volume inicial
+    video.muted = true;
+    video.volume = 1;
+  
+    // Alternar áudio
+    btnAudio.addEventListener('click', async () => {
+      try {
+        // desmutar → mutar
+        if (!video.muted) {
+          video.muted = true;
+          btnAudio.textContent = "▶ Ativar áudio";
+        } 
+        // mutar → desmutar
+        else {
+          video.muted = false;
+          await video.play();
+          btnAudio.textContent = "⏸ Mutar áudio";
+        }
+      } catch (e) {
+        alert("Toque na tela primeiro para liberar o áudio.");
+      }
+    });
+  
+    // Aumentar volume
+    volUp.addEventListener('click', () => {
+      video.volume = Math.min(1, video.volume + 0.1);
+    });
+  
+    // Diminuir volume
+    volDown.addEventListener('click', () => {
+      video.volume = Math.max(0, video.volume - 0.1);
+    });
+  
+    // Impedir scroll mudar volume
+    document.addEventListener("wheel", (e) => e.stopPropagation(), { passive: true });
+  </script>
+  
+  
+</body>
+</html>
