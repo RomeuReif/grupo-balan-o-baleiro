@@ -45,7 +45,7 @@
 
       <div class="right next-show">
         <strong>Próximo show</strong>
-        <div>São Roque • 18/12 • 22h</div>
+        <div>Blumenau - Clube Nova Aurora• 18/12 • 22h</div>
       </div>
     </div>
 
@@ -56,16 +56,20 @@
     <section class="container card" id="agenda">
       <h2>Agenda</h2>
       <div class="agenda-grid">
-        <div class="agenda-item"><strong>12/12 — Festa do CTG</strong><div>Centro Cultural • R$25</div></div>
-        <div class="agenda-item"><strong>18/12 — São Roque</strong><div>Praça Central • Entrada franca</div></div>
-        <div class="agenda-item"><strong>24/12 — Festa de Natal</strong><div>Salão Paroquial • Reservas</div></div>
+        <div class="agenda-item"><strong>18/12 — Blumenau</strong><div>Clube Nova Aurora • R$25</div></div>
+        <div class="agenda-item"><strong>19/12 — Blumenau</strong><div>Salto do Norte • Entrada franca</div></div>
+        <div class="agenda-item"><strong>24/12 — Camboriu</strong><div>Clube Z</div></div>
       </div>
     </section>
 
     <section class="container card" id="videos">
       <h2>Vídeos e melhores momentos</h2>
       <div class="video-grid">
-        <div class="thumb">Thumbnail 1</div>
+        <div class="thumb">
+          <video>
+              <source src="../assets/videos/instagram_video_20251211_014451.mp4" type="video/mp4">
+          </video>    
+        </div>  
         <div class="thumb">Thumbnail 2</div>
         <div class="thumb">Thumbnail 3</div>
       </div>
@@ -74,7 +78,7 @@
     <section class="container card" id="galeria">
       <h2>Galeria</h2>
       <div class="gallery">
-        <img src="photo1.jpg" />
+        <img src="../assets/img/equipe-balanco.jpg" />
         <img src="photo2.jpg" />
         <img src="photo3.jpg" />
         <img src="photo4.jpg" />
@@ -85,10 +89,12 @@
       <h2>Sobre a banda</h2>
       <p>Balança Baleiro é uma banda de bailão com raízes gauchescas.</p>
       <div class="integrantes">
-        <div><strong>Integrante 1</strong><div>Acordeon e voz</div></div>
+        <div><strong>Dirceu </strong><div>Teclado e voz</div></div>
         <div><strong>Integrante 2</strong><div>Violão e harmonia</div></div>
       </div>
     </section>
+
+    
 
     <section class="container card" id="contato">
       <h2 id="contratar">Contrate a banda</h2>
@@ -119,10 +125,16 @@
   </footer>
 
   <script>
+
     const video = document.getElementById('bg-video');
     const btnAudio = document.getElementById('btn-audio');
     const volUp = document.getElementById('volUp');
     const volDown = document.getElementById('volDown');
+
+    // Garantir fade-in mesmo se o vídeo carregar rápido
+    video.addEventListener("loadeddata", () => {
+    video.classList.add("loaded");
+    });
   
     // Volume inicial
     video.muted = true;
@@ -161,6 +173,76 @@
     document.addEventListener("wheel", (e) => e.stopPropagation(), { passive: true });
   </script>
   
-  
+
+  <!-- MODAL DE MÍDIA -->
+<div id="mediaModal" class="modal">
+  <span class="close" id="closeModal">✕</span>
+
+  <!-- Container do conteúdo -->
+  <div class="modal-content">
+      <img id="modalImg" class="hidden" />
+      <video id="modalVideo" controls class="hidden"></video>
+  </div>
+</div>
+
+<script>
+/* ==========================
+   MODAL DE FOTOS E VÍDEOS
+   ========================== */
+
+const modal = document.getElementById("mediaModal");
+const modalImg = document.getElementById("modalImg");
+const modalVideo = document.getElementById("modalVideo");
+const closeModal = document.getElementById("closeModal");
+
+// Abre IMAGEM clicada
+document.querySelectorAll(".gallery img").forEach(img => {
+  img.addEventListener("click", () => {
+    modal.classList.add("open");
+
+    modalImg.src = img.src;
+    modalImg.classList.remove("hidden");
+
+    modalVideo.classList.add("hidden");
+    modalVideo.pause();
+  });
+});
+
+// Abre VÍDEO clicado
+document.querySelectorAll(".video-grid video").forEach(vid => {
+  vid.addEventListener("click", () => {
+    modal.classList.add("open");
+
+    modalVideo.src = vid.querySelector("source").src;
+    modalVideo.classList.remove("hidden");
+    modalVideo.play();
+
+    modalImg.classList.add("hidden");
+  });
+});
+
+// Fechar modal
+function closeAll() {
+  modal.classList.remove("open");
+  modalImg.classList.add("hidden");
+  modalVideo.classList.add("hidden");
+  modalVideo.pause();
+}
+
+  // Botão X
+  closeModal.addEventListener("click", closeAll);
+
+  // Clique fora da mídia
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeAll();
+  });
+
+  // Tecla ESC fecha
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeAll();
+  });
+  </script>
+
+    
 </body>
 </html>
