@@ -113,16 +113,39 @@
       <p>Preencha ou clique no WhatsApp para orçamento.</p>
 
       <div class="contato-grid">
-        <form>
-          <input name="nome" placeholder="Seu nome" required />
-          <input name="email" placeholder="Email" type="email" required />
-          <input name="data" placeholder="Data do evento" />
-          <textarea name="detalhes" placeholder="Detalhes" rows="4"></textarea>
-          <button type="submit">Enviar orçamento</button>
-        </form>
+              <form 
+        action="https://formspree.io/f/mqarwvjg" 
+        method="POST"
+      >
+        <input name="nome" placeholder="Seu nome" required />
+
+        <input 
+          name="email" 
+          type="email" 
+          placeholder="Email" 
+          required 
+        />
+
+        <input 
+          name="data" 
+          placeholder="Data do evento" 
+        />
+
+        <textarea 
+          name="detalhes" 
+          placeholder="Detalhes do evento e seu numero de contato" 
+          rows="4"
+        ></textarea>
+
+        <!-- Campo escondido (opcional, mas profissional) -->
+        <input type="hidden" name="_subject" value="Novo orçamento — Balança Baleiro" />
+
+        <button type="submit">Enviar orçamento</button>
+      </form>
+
 
         <div class="side-contact">
-          <a href="#" class="zap">WhatsApp</a>
+          <a href="https://wa.me/5547997708252" class="zap">WhatsApp</a>
           <div class="card mini">
             <strong>Mídia kit</strong>
             <p>Fotos, vídeo promo e setlist.</p>
@@ -239,6 +262,7 @@ function closeAll() {
   modalImg.classList.add("hidden");
   modalVideo.classList.add("hidden");
   modalVideo.pause();
+  modalVideo.src = "";
 }
 
   // Botão X
