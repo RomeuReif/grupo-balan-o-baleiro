@@ -13,6 +13,10 @@
   *{box-sizing:border-box}
   body{margin:0;background:linear-gradient(#0b0b0b,#121212);color:var(--muted)}
   a{color:var(--accent)}
+
+  section {
+    scroll-margin-top: 90px;
+  }
   
   header{
     position:fixed;top:0;left:0;right:0;
@@ -163,6 +167,12 @@
     cursor: pointer;
     transition: transform .2s, box-shadow .2s;
   }
+
+  .video-grid video {
+    aspect-ratio: 9 / 16; /* se for vertical */
+    object-fit: cover;
+  }
+  
   
   .video-grid video:hover {
     transform: scale(1.05);
